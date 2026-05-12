@@ -8,7 +8,7 @@ export default function Header() {
         <div className={styles['header__logo']}>
           <Image
             className={styles['header__logo-image']}
-            src="/images/proboi-logo.webp"
+            src="/index-js/images/proboi-logo.webp"
             alt="Logo Image"
             width={141}
             height={36}

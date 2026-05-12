@@ -4,6 +4,9 @@ import { useState } from 'react';
 import { forWhomContent } from './forWhomContent';
 import Image from 'next/image';
 
+import arrowLeft from '../../../public/images/icons/arrow-left.svg';
+import arrowRight from '../../../public/images/icons/arrow-right.svg';
+
 export default function ForWhom() {
   const [activeTab, setActiveTab] = useState('fighter');
 
@@ -52,10 +55,10 @@ export default function ForWhom() {
           </Title>
           <div className={styles['for-whom__slider-arrows']}>
             <button className={styles['for-whom__arrow']} onClick={handlePrev}>
-              <Image src='/images/icons/arrow-left.svg' alt='Назад' width={20} height={20} />
+              <Image src={arrowLeft} alt='Назад' width={20} height={20} />
             </button>
             <button className={styles['for-whom__arrow']} onClick={handleNext}>
-              <Image src='/images/icons/arrow-right.svg' alt='Вперёд' width={20} height={20} />
+              <Image src={arrowRight} alt='Вперёд' width={20} height={20} />
             </button>
           </div>
         </div>
