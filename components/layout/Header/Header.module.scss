@@ -1,0 +1,94 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--color-main-dark-blue);
+  height: var(--height-header);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--color-border);
+
+  &__container-inner {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 var(--padding-container);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+	&__logo-image {
+		height: 32px;
+		width: auto;
+		object-fit: contain;
+		cursor: pointer;
+		transition: opacity var(--transition-default);
+
+		&:hover {
+			opacity: var(--opacity-default);
+		}
+	}
+
+  &__navigation {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border-radius: 9999px;
+    border: 1px solid var(--color-border);
+    padding: 2px;
+    height: 42px;
+    box-sizing: border-box;
+
+    @media (max-width: 1024px) {
+      display: none;
+    }
+  }
+
+  &__navigation-link {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 16px;
+    border-radius: 9999px;
+    text-decoration: none;
+    color: var(--color-main-white);
+    font-weight: 400;
+    font-size: 14px;
+    transition: background-color var(--transition-default), opacity var(--transition-default);
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  &__navigation-button {
+    background-color: var(--color-main-pink);
+    color: var(--color-main-white);
+    height: 42px;
+    padding: 0 20px;
+    border-radius: 9999px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background-color var(--transition-default), transform var(--transition-default) ease;
+
+    @media (max-width: 480px) {
+      padding: 0 16px;
+      font-size: 13px;
+    }
+  }
+}

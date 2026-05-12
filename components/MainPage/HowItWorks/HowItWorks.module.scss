@@ -1,0 +1,77 @@
+.how-it-works {
+  &__header {
+    margin-top: 160px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 48px;
+  }
+
+  &__title {
+    margin: 0;
+    line-height: 1;
+  }
+
+  &__title--pro {
+    font-weight: 800;
+  }
+
+  &__title--boi {
+    font-weight: 400;
+  }
+
+  &__roles {
+    display: flex;
+    gap: 12px;
+  }
+
+  &__role {
+    border: 1px solid var(--color-border-solid);
+    border-radius: 1000px;
+    padding: 12px 24px;
+    background: transparent;
+    cursor: pointer;
+    transition: all var(--transition-default) ease;
+
+    &:hover {
+      background: var(--color-border);
+    }
+  }
+
+  &__cards {
+    display: flex;
+    gap: 36px;
+  }
+
+  &__card {
+    flex: 1;
+    background-color: var(--color-main-white);
+    border-radius: var(--radius-default);
+    box-shadow: var(--shadow-default);
+    padding: 24px;
+    transition: transform var(--transition-default) ease, box-shadow var(--transition-default) ease;
+    display: flex;
+    flex-direction: column;
+    min-height: 420px;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover-default);
+    }
+  }
+
+  &__card-content {
+    flex: 1;
+  }
+
+  &__card-image {
+    width: calc(100% + 48px);
+    height: 200px;
+    background-color: #e2e2e2;
+    margin-top: auto;
+    margin-left: -24px;
+    margin-bottom: -24px;
+    border-bottom-left-radius: var(--radius-default);
+    border-bottom-right-radius: var(--radius-default);
+  }
+}

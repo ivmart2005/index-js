@@ -1,0 +1,54 @@
+.ai-coefficient {
+  padding-top: 52px;
+  margin-top: 140px;
+  position: relative;
+  background-color: var(--color-main-black);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 100%;
+    background-color: var(--color-main-black);
+    z-index: -1;
+  }
+
+  &__title-accent {
+    color: var(--color-main-pink);
+  }
+
+  &__cards {
+    margin-top: 42px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+
+  &__card {
+    background-color: var(--color-main-white);
+    border-radius: var(--radius-default);
+    padding: 24px;
+    transition: transform var(--transition-default) ease;
+
+    &:hover {
+      transform: translateY(-4px);
+    }
+  }
+
+  &__card-icon {
+    width: 52px;
+    height: 52px;
+    background-color: #e0e0e0;
+    border-radius: var(--radius-default);
+    margin-bottom: 16px;
+  }
+
+  &__bottom-text {
+    margin-top: 42px;
+    padding-bottom: 64px;
+    text-align:center;
+  }
+}

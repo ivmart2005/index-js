@@ -1,0 +1,43 @@
+.title {
+  margin: 0 0 16px 0;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 36px;
+  color: var(--color-text-primary);
+
+  &_white {
+    color: var(--color-main-white);
+  }
+
+  &_red {
+    color: var(--color-main-pink);
+  }
+
+  & a[class*="Link"] {
+    font-size: inherit !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 432px) {
+  .title {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 375px) {
+  .title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 320px) {
+  .title {
+    font-size: 20px;
+  }
+}
