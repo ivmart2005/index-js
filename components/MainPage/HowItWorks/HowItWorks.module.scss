@@ -1,6 +1,8 @@
 .how-it-works {
+  padding-top: 80px;
+  
   &__header {
-    margin-top: 160px;
+    margin-top: 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -39,12 +41,12 @@
   }
 
   &__cards {
-    display: flex;
-    gap: 36px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--card-width), 1fr));
+    gap: var(--gap-slider);
   }
 
   &__card {
-    flex: 1;
     background-color: var(--color-main-white);
     border-radius: var(--radius-default);
     box-shadow: var(--shadow-default);
@@ -52,7 +54,8 @@
     transition: transform var(--transition-default) ease, box-shadow var(--transition-default) ease;
     display: flex;
     flex-direction: column;
-    min-height: 420px;
+    min-height: 440px;
+    max-width: 420px;
 
     &:hover {
       transform: translateY(-4px);
@@ -62,6 +65,7 @@
 
   &__card-content {
     flex: 1;
+    margin-bottom: 24px;
   }
 
   &__card-image {
@@ -73,5 +77,42 @@
     margin-bottom: -24px;
     border-bottom-left-radius: var(--radius-default);
     border-bottom-right-radius: var(--radius-default);
+  }
+
+  @media (max-width: 1100px) {
+    &__header {
+      flex-direction: column;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    &__role {
+      padding: 8px 16px;
+    }
+    
+    &__role-text {
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 500px) {
+    &__header {
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    &__roles {
+      flex-direction: column;
+    }
+
+    &__role {
+      padding: 8px 16px;
+      text-align: center;
+    }
+    
+    &__role-text {
+      font-size: 12px;
+    }
   }
 }

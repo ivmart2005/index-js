@@ -1,0 +1,1608 @@
+Файл: Button.tsx
+========================================
+
+
+Файл: index.tsx
+========================================
+export { Text } from "./Text"
+export { Title } from "./Title"
+
+Файл: index.tsx
+========================================
+import { FC, JSX, memo, ReactNode } from "react"
+import styles from "./Text.module.scss"
+import clsx from "clsx"
+
+interface IProps {
+  children: ReactNode
+  size?: "xs" | "s" | "m" | "l" | "xl"
+  weight?: "300" | "400" | "500" | "600" | "700"
+  color?:
+    | "primary"
+    | "secondary"
+    | "white"
+    | "light"
+    | "gray"
+    | "dim"
+    | "success"
+    | "danger"
+    | "red"
+  as?: "p" | "span" | "div" | "h1" | "h2" | "h3"
+  nowrap?: boolean
+  uppercase?: boolean
+  className?: string
+}
+
+export const Text: FC<IProps> = memo(
+  ({
+    children,
+    size = "m",
+    weight = "400",
+    color = "primary",
+    as: Tag = "p",
+    nowrap = false,
+    uppercase = false,
+    className = ""
+  }): JSX.Element => {
+    return (
+      <Tag
+        className={clsx(
+          styles.text,
+          styles[`text--${size}`],
+          styles[`text--${weight}`],
+          styles[`text--${color}`],
+          className
+        )}
+        style={{
+          whiteSpace: nowrap ? "nowrap" : "initial",
+          textTransform: uppercase ? "uppercase" : "initial"
+        }}
+      >
+        {children}
+      </Tag>
+    )
+  }
+)
+
+
+Файл: Text.module.scss
+========================================
+.text {
+  margin: 0;
+  line-height: 1.5;
+  font-family: inherit;
+
+  &--xs {
+    font-size: 12px;
+  }
+
+  &--s {
+    font-size: 14px;
+  }
+
+  &--m {
+    font-size: 16px;
+  }
+
+  &--l {
+    font-size: 18px;
+  }
+
+  &--xl {
+    font-size: 20px;
+  }
+
+  &--300 {
+    font-weight: 300;
+  }
+
+  &--400 {
+    font-weight: 400;
+  }
+
+  &--500 {
+    font-weight: 500;
+  }
+
+  &--600 {
+    font-weight: 600;
+  }
+
+  &--700 {
+    font-weight: 700;
+  }
+
+  &--primary {
+    color: var(--color-text-primary);
+  }
+
+  &--secondary {
+    color: var(--color-text-secondary);
+  }
+
+  &--danger {
+    color: var(--color-danger);
+  }
+
+  &--success {
+    color: var(--color-success);
+  }
+
+  &--white {
+    color: var(--color-main-white);
+  }
+
+  &--light {
+    color: #ccc;
+  }
+
+  &--gray {
+    color: #737477;
+  }
+
+  &--dim {
+    color: #000f1e99;
+  }
+
+  &--red {
+    color: var(--color-main-pink);
+  }
+}
+
+@media (max-width: 432px) {
+  .text {
+    font-size: 14px;
+    &--xl {
+      font-size: 18px;
+    }
+    &--l {
+      font-size: 16px;
+    }
+    &--s {
+      font-size: 13px;
+    }
+    &--xs {
+      font-size: 12px;
+    }
+  }
+}
+
+
+Файл: index.tsx
+========================================
+import { FC, JSX, memo, ReactNode } from "react"
+import styles from "./Title.module.scss"
+import clsx from "clsx"
+
+interface IProps {
+  children: ReactNode
+  as?: 1 | 2 | 3
+  color?: "white" | "red"
+  className?: string
+}
+
+export const Title: FC<IProps> = memo(
+  ({ children, as = 3, color, className }): JSX.Element => {
+    const Tag = `h${as}` as const
+    return (
+      <Tag
+        className={clsx(
+          styles.title,
+          color && styles[`title_${color}`],
+          className
+        )}
+      >
+        {children}
+      </Tag>
+    )
+  }
+)
+
+
+Файл: Title.module.scss
+========================================
+.title {
+  margin: 0 0 16px 0;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 36px;
+  color: var(--color-text-primary);
+
+  &_white {
+    color: var(--color-main-white);
+  }
+
+  &_red {
+    color: var(--color-main-pink);
+  }
+
+  & a[class*="Link"] {
+    font-size: inherit !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 432px) {
+  .title {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 375px) {
+  .title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 320px) {
+  .title {
+    font-size: 20px;
+  }
+}
+
+
+Файл: Header.module.scss
+========================================
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--color-main-dark-blue);
+  height: var(--height-header);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--color-border);
+
+  &__container-inner {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 var(--padding-container);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+	&__logo-image {
+		height: 32px;
+		width: auto;
+		object-fit: contain;
+		cursor: pointer;
+		transition: opacity var(--transition-default);
+
+		&:hover {
+			opacity: var(--opacity-default);
+		}
+	}
+
+  &__navigation {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border-radius: 9999px;
+    border: 1px solid var(--color-border);
+    padding: 2px;
+    height: 42px;
+    box-sizing: border-box;
+
+    @media (max-width: 1024px) {
+      display: none;
+    }
+  }
+
+  &__navigation-link {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 16px;
+    border-radius: 9999px;
+    text-decoration: none;
+    color: var(--color-main-white);
+    font-weight: 400;
+    font-size: 14px;
+    transition: background-color var(--transition-default), opacity var(--transition-default);
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  &__navigation-button {
+    background-color: var(--color-main-pink);
+    color: var(--color-main-white);
+    height: 42px;
+    padding: 0 20px;
+    border-radius: 9999px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background-color var(--transition-default), transform var(--transition-default) ease;
+
+    @media (max-width: 480px) {
+      padding: 0 16px;
+      font-size: 13px;
+    }
+  }
+}
+
+Файл: Header.tsx
+========================================
+import Image from 'next/image';
+import styles from './Header.module.scss';
+
+export default function Header() {
+  return (
+    <header className={styles['header']}>
+      <div className={styles['header__container-inner']}>
+        <div className={styles['header__logo']}>
+          <Image
+            className={styles['header__logo-image']}
+            src="/index-js/images/proboi-logo.webp"
+            alt="Logo Image"
+            width={141}
+            height={36}
+            priority
+          />
+        </div>
+
+        <nav className={styles['header__navigation']}>
+          <a className={styles['header__navigation-link']} href="#for_who">Для кого</a>
+          <a className={styles['header__navigation-link']} href="#how_it_works">Как это работает</a>
+          <a className={styles['header__navigation-link']} href="#ai_coefficient">AI-коэффициент</a>
+          <a className={styles['header__navigation-link']} href="#catalog">Каталог бойцов</a>
+          <a className={styles['header__navigation-link']} href="#why">Преимущества</a>
+          <a className={styles['header__navigation-link']} href="#faq">ЧАВО</a>
+        </nav>
+
+        <button className={styles['header__navigation-button']}>Присоединиться</button>
+      </div>
+    </header>
+  );
+}
+
+Файл: MobileMenu.tsx
+========================================
+
+
+Файл: AICoefficient.module.scss
+========================================
+.ai-coefficient {
+  padding-top: 52px;
+  margin-top: 140px;
+  position: relative;
+  background-color: var(--color-main-black);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 100%;
+    background-color: var(--color-main-black);
+    z-index: -1;
+  }
+
+  &__title-accent {
+    color: var(--color-main-pink);
+  }
+
+  &__cards {
+    margin-top: 42px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+
+  &__card {
+    background-color: var(--color-main-white);
+    border-radius: var(--radius-default);
+    padding: 24px;
+    transition: transform var(--transition-default) ease;
+
+    &:hover {
+      transform: translateY(-4px);
+    }
+  }
+
+  &__card-icon {
+    width: 52px;
+    height: 52px;
+    background-color: #e0e0e0;
+    border-radius: var(--radius-default);
+    margin-bottom: 16px;
+  }
+
+  &__bottom-text {
+    margin-top: 42px;
+    padding-bottom: 64px;
+    text-align:center;
+  }
+}
+
+Файл: AICoefficient.tsx
+========================================
+import { Title, Text } from '../../common';
+import styles from './AICoefficient.module.scss';
+import { aiCoefficientContent } from './AICoefficientContent';
+
+export default function AICoefficient() {
+  return (
+    <section className={styles['ai-coefficient']}>
+      <div className={styles['ai-coefficient__header']}>
+        <div className={styles['ai-coefficient__title-container']}>
+          <Title as={2} color='white' className={styles['ai-coefficient__title']}>
+            {aiCoefficientContent.title}
+            <span className={styles['ai-coefficient__title-accent']}>
+              {aiCoefficientContent.titleAccent}
+            </span>
+          </Title>
+          <Text
+            size='l'
+            color='light'
+            className={styles['ai-coefficient__subtitle']}
+          >
+            {aiCoefficientContent.subtitle}
+          </Text>
+        </div>
+      </div>
+
+      <div className={styles['ai-coefficient__cards']}>
+        {aiCoefficientContent.cards.map((card, index) => (
+          <div key={index} className={styles['ai-coefficient__card']}>
+            <div className={styles['ai-coefficient__card-icon']}></div>
+            <Text
+              size='xl'
+              weight='600'
+              className={styles['ai-coefficient__card-title']}
+            >
+              {card.title}
+            </Text>
+            <Text
+              size='m'
+              className={styles['ai-coefficient__card-text']}
+            >
+              {card.description}
+            </Text>
+          </div>
+        ))}
+      </div>
+
+      <Text
+        size='s'
+        color='light'
+        className={styles['ai-coefficient__bottom-text']}
+      >
+        {aiCoefficientContent.bottomText}
+      </Text>
+    </section>
+  );
+}
+
+Файл: AICoefficientContent.ts
+========================================
+export const aiCoefficientContent = {
+  title: 'AI-',
+  titleAccent: 'коэффициент',
+  subtitle: '— цифровая оценка перспективности бойца и подбора соперника для боя',
+  bottomText: 'Мы используем нейросети, чтобы упростить промоутерам отбор бойцов и дать самим бойцам объективный взгляд на свою статистику.',
+  cards: [
+    {
+      title: 'Удобные коэффициенты',
+      description: 'Понятный показатель, который отображается в профиле бойца в виде бейджа. Число от 1 до 100 или коэффициент (например, 1.5)'
+    },
+    {
+      title: 'Учитываем ключевые параметры',
+      description: 'Статистика побед/поражений, винстрик, возраст, вес и другие показатели, влияющие на реальную боевую форму'
+    },
+    {
+      title: 'Живая база бойцов',
+      description: 'История всех анкет хранится в формате, удобном для ИИ, поэтому система со временем «умнеет» и даёт всё более точные рекомендации'
+    }
+  ]
+};
+
+Файл: CatalogSection.module.scss
+========================================
+.catalog-section {
+  padding-top: 80px;
+  margin-top: 0px;
+  position: relative;
+  background-color: var(--color-main-black);
+  text-align: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 100%;
+    background-color: var(--color-main-black);
+    z-index: -1;
+  }
+
+  &__title {
+    font-size: 32px;
+    color: var(--color-main-pink);
+    margin-bottom: 0px;
+  }
+
+  &__subtitle {
+    font-size: 52px;
+  }
+
+  &__image {
+    width: 100%;
+    max-width: 800px;
+    height: 400px;
+    background-color: #2b2b2b;
+    border-radius: var(--radius-default);
+    margin: 44px auto;
+  }
+
+  &__bottom-text {
+    padding-bottom: 64px;
+  }
+}
+
+Файл: CatalogSection.tsx
+========================================
+import { Title, Text } from '../../common';
+import styles from './CatalogSection.module.scss';
+
+export default function CatalogSection() {
+  return (
+    <section className={styles['catalog-section']}>
+      <div className={styles['catalog-section__header']}>
+        <Title
+          as={2}
+					color='white'
+          className={styles['catalog-section__title']}
+        >
+          Каталог бойцов
+        </Title>
+        <Title
+					as={3}
+					color='white'
+					className={styles['catalog-section__subtitle']}
+        >
+          Который работает вместо десятков таблиц
+        </Title>
+        <Text
+					size='xl'
+					color='light'
+					className={styles['catalog-section__description']}
+				>
+          Каждый боец представлен в виде карточки
+        </Text>
+      </div>
+
+      <div className={styles['catalog-section__image']}>
+        {/* большая картинка */}
+      </div>
+
+      <Text
+				size='xl'
+				color='light'
+				className={styles['catalog-section__bottom-text']}
+			>
+        Для промоутера это быстрый способ просмотреть пул кандидатов, сравнить их по ключевым
+        метрикам и выбрать лучших под конкретный турнир.
+      </Text>
+    </section>
+  );
+}
+
+Файл: ChaosSection.module.scss
+========================================
+.chaos {
+  &__header {
+    margin: 0 auto;
+    margin-top: 140px;
+  }
+
+  &__problem {
+    display: inline-block;
+    background-color: var(--color-main-pink);
+    color: var(--color-main-white);
+    padding: 4px 12px;
+    margin-bottom: 16px;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 60px;
+  }
+
+  &__problems {
+    background-color: var(--color-bg-disabled);
+    border-radius: 24px;
+    border: 1px solid var(--color-border);
+    padding: 32px;
+  }
+
+  &__problems-title {
+    display: block;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  &__number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background-color: var(--color-main-pink);
+    border-radius: 100%;
+    color: var(--color-main-white);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  &__text {
+    line-height: 24px;
+  }
+
+  &__problems-title {
+    display: block;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+
+
+&__solution {
+    padding: 32 px;
+  }
+
+  &__solution-header {
+    margin-bottom: 32px;
+  }
+
+  &__solution-accent {
+  }
+
+  &__solution-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  &__solution-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__solution-icon {
+    width: 48px;
+    height: 48px;
+    background-color: var(--color-border);
+    border-radius: 16px;
+  }
+
+  &__solution-text {
+    flex: 1;
+  }
+}
+
+Файл: ChaosSection.tsx
+========================================
+import { Title, Text } from '../../common';
+import styles from './ChaosSection.module.scss';
+
+export default function ChaosSection() {
+  return (
+    <section className={styles['chaos']}>
+      <div className={styles['chaos__header']}>
+        <Title
+					as={3}
+					className={styles['chaos__problem']}
+				>
+          ХАОС В МАТЧМЕЙКИНГЕ
+        </Title>
+        <Title
+					as={3}
+					className={styles['chaos__title']}
+				>
+          Мы превращаем в понятный<br/>
+          цифровой процесс
+        </Title>
+      </div>
+
+      <div className={styles['chaos__grid']}>
+        <div className={styles['chaos__problems']}>
+          <Text
+            size='m'
+            weight='400'
+            color='secondary'
+            className={styles['chaos__problems-title']}
+          >
+            Проблемы рынка сегодня:
+          </Text>
+          <ul className={styles['chaos__list']}>
+            {[
+              'Поиск бойцов через знакомых, чаты и ручные списки.',
+              'Сложно быстро оценить реальный уровень бойца.',
+              'Высокий риск фейковых анкет и завышенной статистики.'
+            ].map((text, index) => (
+              <li key={index} className={styles['chaos__list-item']}>
+                <span className={styles['chaos__number']}>{index + 1}</span>
+                <Text
+									size='m'
+									color='secondary'
+									className={styles['chaos__text']}
+								>
+                  {text}
+                </Text>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+				<div className={styles['chaos__solution']}>
+					<div className={styles['chaos__solution-header']}>
+						<Title
+							as={3}
+							className={styles['chaos__solution-title']}
+						>
+							Решение <span className={styles['chaos__solution-accent']}>PROБОИ</span>
+						</Title>
+					</div>
+					<div className={styles['chaos__solution-grid']}>
+						{[
+							'Единая онлайн-платформа бойцов и промоутеров',
+							'ИИ, который помогает быстро понять перспективность бойца',
+							'Структурированные анкеты с ключевыми параметрами',
+							'Строгая модерация анкет и бан фейковых аккаунтов'
+						].map((text, index) => (
+							<div key={index} className={styles['chaos__solution-item']}>
+								<div className={styles['chaos__solution-icon']}></div>
+								<Text
+									size='m'
+									color='secondary'
+									className={styles['chaos__solution-text']}
+								>
+									{text}
+								</Text>
+							</div>
+						))}
+					</div>
+				</div>
+      </div>
+    </section>
+  );
+}
+
+Файл: ForWhom.module.scss
+========================================
+.for-whom {
+  position: relative;
+  padding: 60px 0;
+  min-height: 460px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 99vw;
+    height: 100%;
+    background-color: var(--color-main-black);
+    z-index: -1;
+  }
+
+  &__title-container {
+    margin-bottom: 60px;
+  }
+
+  &__title--pro {
+    color: var(--color-main-pink);
+  }
+
+  &__description {
+    max-width: 1000px;
+  }
+
+  &__slider-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__slider-arrows {
+    display: flex;
+    gap: 12px;
+  }
+
+  &__arrow {
+    background: transparent;
+    border: 1.5px solid var(--color-main-white);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: var(--color-main-white);
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  &__slider-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__slider-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  &__check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background-color: var(--color-main-pink);
+    border-radius: 50%;
+    color: var(--color-main-white);
+    font-size: 12px;
+    font-weight: 600;
+  }
+}
+
+Файл: ForWhom.tsx
+========================================
+import { Title, Text } from '../../common';
+import styles from './ForWhom.module.scss';
+import { useState } from 'react';
+import { forWhomContent } from './forWhomContent';
+import Image from 'next/image';
+
+import arrowLeft from '../../../public/images/icons/arrow-left.svg';
+import arrowRight from '../../../public/images/icons/arrow-right.svg';
+
+export default function ForWhom() {
+  const [activeTab, setActiveTab] = useState('fighter');
+
+  const handlePrev = () => {
+    const currentIndex = forWhomContent.tabs.findIndex(tab => tab.id === activeTab);
+    const prevIndex = currentIndex === 0 ? forWhomContent.tabs.length - 1 : currentIndex - 1;
+    setActiveTab(forWhomContent.tabs[prevIndex].id);
+  };
+
+  const handleNext = () => {
+    const currentIndex = forWhomContent.tabs.findIndex(tab => tab.id === activeTab);
+    const nextIndex = currentIndex === forWhomContent.tabs.length - 1 ? 0 : currentIndex + 1;
+    setActiveTab(forWhomContent.tabs[nextIndex].id);
+  };
+
+  return (
+    <section className={styles['for-whom']}>
+      <div className={styles['for-whom__title-container']}>
+        <Title
+          as={2}
+          color='white'
+          className={styles['for-whom__title']}
+        >
+          Для кого созданы{' '}
+          <span className={styles['for-whom__title--pro']}>PRO</span>
+          <span className={styles['for-whom__title--boi']}>БОИ</span>
+        </Title>
+        <Text
+          size='m'
+          color='white'
+          className={styles['for-whom__description']}
+        >
+          Мы цифровизируем рынок боев без правил и делаем его прозрачнее для всех
+          участников – работаем на рынке боев в РФ более _ лет и знаем процессы изнутри.
+        </Text>
+      </div>
+
+      <div className={styles['for-whom__slider']}>
+        <div className={styles['for-whom__slider-header']}>
+          <Title
+            as={3}
+            color='white'
+            className={styles['for-whom__slider-title']}
+          >
+            {forWhomContent.tabs.find(tab => tab.id === activeTab)?.title}
+          </Title>
+          <div className={styles['for-whom__slider-arrows']}>
+            <button className={styles['for-whom__arrow']} onClick={handlePrev}>
+              <Image src={arrowLeft} alt='Назад' width={20} height={20} />
+            </button>
+            <button className={styles['for-whom__arrow']} onClick={handleNext}>
+              <Image src={arrowRight} alt='Вперёд' width={20} height={20} />
+            </button>
+          </div>
+        </div>
+
+        <ul className={styles['for-whom__slider-list']}>
+          {forWhomContent.content[activeTab as keyof typeof forWhomContent.content].map((item, index) => (
+            <li
+              key={index}
+              className={styles['for-whom__slider-item']}
+            >
+              <span className={styles['for-whom__check']}>{index + 1}</span>
+              <Text
+                size='m'
+                color='white'
+                className={styles['for-whom__slider-text']}
+              >
+                {item}
+              </Text>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+Файл: forWhomContent.ts
+========================================
+export const forWhomContent = {
+  tabs: [
+    { id: 'fighter', title: 'Для бойцов' },
+    { id: 'promoter', title: 'Для промоутеров' },
+    { id: 'advertiser', title: 'Для рекламодателей' }
+  ],
+  content: {
+    fighter: [
+      'Отслеживайте свой Al-коэффициент — оценку перспективности на основе статистики.',
+      'Создайте профессиональную анкету с рекордом, антропометрией и условиями сотрудничества.',
+      'Получайте предложения напрямую от промоутеров.',
+      'Управляйте статусом и занятостью'
+    ],
+    promoter: [
+      'Доступ к каталогу бойцов с подробной статистикой',
+      'Искусственный интеллект для мэтчинга боев с прогнозами результатов',
+      'Удобные фильтры по весу, дисциплине и городу',
+      'Контакт с бойцами в один клик через внутренний чат или Telegram',
+      'Экономия времени на поиск и отбор'
+    ],
+    advertiser: [
+      'Отслеживайте свободные слоты в рамках боев',
+      'Участвуйте в аукционах на рекламу',
+      'Транслируйте свою продукцию на аудиторию 15+ млн человек в РФ и за границей',
+      'Анализируйте конверсию рекламы в личном кабинете'
+    ]
+  }
+};
+
+Файл: Hero.module.scss
+========================================
+.hero {
+  padding: 180px 0 40px;
+
+  &__title {
+    margin-bottom: 24px;
+  }
+
+  &__title--pro {
+    font-weight: 800;
+  }
+
+  &__title--boi {
+    font-weight: 400;
+  }
+
+  &__title-tagline {
+    margin-left: 8px;
+    display: inline-block;
+  }
+
+  &__description {
+    max-width: 800px;
+    margin-left: 0;
+    margin-right: auto;
+  }
+}
+
+Файл: Hero.tsx
+========================================
+import { Title, Text } from '../../common';
+import styles from './Hero.module.scss';
+import Image from 'next/image';
+
+export default function Hero() {
+  return (
+    <section className={styles['hero']}>
+      <Title as={1} className={styles['hero__title']}>
+        <span className={styles['hero__title--pro']}>PRO</span>
+        <span className={styles['hero__title--boi']}>БОИ</span>
+        <span className={styles['hero__title-tagline']}>
+          {' '} — цифровая площадка для боев без правил
+        </span>
+      </Title>
+      <Text
+        size='l'
+        color='secondary'
+        className={styles['hero__description']}
+      >
+        Мы соединяем бойцов и промоутеров на одной онлайн-платформе. Анкеты бойцов, умный
+        AI-рейтинг, рекламный кабинет и прямые контракты с бойцами и промоутерами — всё, чтобы бой
+        стал незабываемым как для зрителя, так и для промоутера.
+      </Text>
+    </section>
+  );
+}
+
+Файл: HowItWorks.module.scss
+========================================
+.how-it-works {
+  &__header {
+    margin-top: 160px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 48px;
+  }
+
+  &__title {
+    margin: 0;
+    line-height: 1;
+  }
+
+  &__title--pro {
+    font-weight: 800;
+  }
+
+  &__title--boi {
+    font-weight: 400;
+  }
+
+  &__roles {
+    display: flex;
+    gap: 12px;
+  }
+
+  &__role {
+    border: 1px solid var(--color-border-solid);
+    border-radius: 1000px;
+    padding: 12px 24px;
+    background: transparent;
+    cursor: pointer;
+    transition: all var(--transition-default) ease;
+
+    &:hover {
+      background: var(--color-border);
+    }
+  }
+
+  &__cards {
+    display: flex;
+    gap: 36px;
+  }
+
+  &__card {
+    flex: 1;
+    background-color: var(--color-main-white);
+    border-radius: var(--radius-default);
+    box-shadow: var(--shadow-default);
+    padding: 24px;
+    transition: transform var(--transition-default) ease, box-shadow var(--transition-default) ease;
+    display: flex;
+    flex-direction: column;
+    min-height: 420px;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover-default);
+    }
+  }
+
+  &__card-content {
+    flex: 1;
+  }
+
+  &__card-image {
+    width: calc(100% + 48px);
+    height: 200px;
+    background-color: #e2e2e2;
+    margin-top: auto;
+    margin-left: -24px;
+    margin-bottom: -24px;
+    border-bottom-left-radius: var(--radius-default);
+    border-bottom-right-radius: var(--radius-default);
+  }
+}
+
+Файл: HowItWorks.tsx
+========================================
+import { Title, Text } from '../../common';
+import styles from './HowItWorks.module.scss';
+import { useState } from 'react';
+import { howItWorksContent } from './howItWorksContent';
+
+export default function HowItWorks() {
+  const [activerole, setActiverole] = useState('fighter');
+
+  const currentContent = howItWorksContent.content[activerole as keyof typeof howItWorksContent.content];
+
+  return (
+    <section className={styles['how-it-works']}>
+      <div className={styles['how-it-works__header']}>
+        <Title
+          as={3}
+          className={styles['how-it-works__title']}
+        >
+          Как работают{' '}
+          <span className={styles['how-it-works__title--pro']}>PRO</span>
+          <span className={styles['how-it-works__title--boi']}>БОИ</span>
+        </Title>
+        <div className={styles['how-it-works__roles']}>
+          {howItWorksContent.roles.map(role => (
+            <button
+              key={role.id}
+              className={`${styles['how-it-works__role']} ${activerole === role.id ? styles['how-it-works__role--active'] : ''}`}
+              onClick={() => setActiverole(role.id)}
+            >
+              <Text
+                size='s'
+                weight='600'
+                color='primary'
+                className={styles['how-it-works__role-text']}
+              >
+                {role.title}
+              </Text>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className={styles['how-it-works__cards']}>
+        {currentContent.map((item, index) => (
+          <div
+            key={index}
+            className={styles['how-it-works__card']}
+          >
+            <div className={styles['how-it-works__card-content']}>
+              <div className={styles['how-it-works__card-step']}>{item.step}</div>
+              <Title
+                as={3}
+                className={styles['how-it-works__card-title']}
+              >
+                {item.title}
+              </Title>
+              <Text
+                size='m'
+                color='secondary'
+                className={styles['how-it-works__card-text']}
+              >
+                {item.description}
+              </Text>
+            </div>
+            <div className={styles['how-it-works__card-image']}>
+              {/* картинка */}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+Файл: howItWorksContent.ts
+========================================
+export const howItWorksContent = {
+  roles: [
+    { id: 'fighter', title: 'Для бойца' },
+    { id: 'promoter', title: 'Для промоутера' },
+    { id: 'advertiser', title: 'Для рекламодателя' }
+  ],
+  content: {
+    fighter: [
+      {
+        step: 'Шаг 1',
+        title: 'Регистрация',
+        description: 'Создайте аккаунт и заполните анкету: ФИО или никнейм, фото, вес, рост, возраст, рекорд, описание и контакт в Telegram.'
+      },
+      {
+        step: 'Шаг 2',
+        title: 'AI-оценка',
+        description: 'Система анализирует вашу статистику (возраст, вес, винстрик, рекорд и др.) и с помощью ИИ рассчитывает персональный коэффициент победы.'
+      },
+      {
+        step: 'Шаг 3',
+        title: 'Получайте предложения',
+        description: 'Промоутеры находят вас через каталог и отправляют предложение боя напрямую во внутренний чат или Telegram.'
+      }
+    ],
+    promoter: [
+      {
+        step: 'Шаг 1',
+        title: 'Регистрация',
+        description: 'Зарегистрируйтесь как промоутер и получите полный доступ к уникальному каталогу бойцов.'
+      },
+      {
+        step: 'Шаг 2',
+        title: 'Удобные фильтры',
+        description: 'Настройте фильтры по весу, дисциплине и городу. Смотрите рекорд, AI-коэффициент и статус «Ищу бой» или «Занят».'
+      },
+      {
+        step: 'Шаг 3',
+        title: 'Быстрая связь',
+        description: 'Нажмите «Предложить бой» — и переходите к диалогу с бойцом в прямо в Telegram. Быстро как никогда.'
+      }
+    ],
+    advertiser: [
+      {
+        step: 'Шаг 1',
+        title: 'Регистрация',
+        description: 'Создайте аккаунт рекламодателя, укажите информацию о компании, бюджете и целевой аудитории для рекламных кампаний.'
+      },
+      {
+        step: 'Шаг 2',
+        title: 'Онлайн аукцион',
+        description: 'Участвуйте в онлайн-аукционах на рекламные слоты. Ставьте ставки и выигрывайте лучшие позиции для вашей рекламы.'
+      },
+      {
+        step: 'Шаг 3',
+        title: 'Удобные метрики',
+        description: 'Отслеживайте эффективность рекламы в личном кабинете. Анализируйте конверсию, охват и другие ключевые показатели.'
+      }
+    ]
+  }
+};
+
+Файл: RoleCards.module.scss
+========================================
+.role-cards {
+  padding: 40px 0;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+
+  &__card {
+    background: var(--color-main-white);
+    border-radius: var(--radius-default);
+    box-shadow: var(--shadow-default);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover-default);
+    }
+  }
+
+  &__image-placeholder {
+    width: 100%;
+    height: 160px;
+    background-color: #e8e8e8;
+  }
+
+  &__title {
+    margin: 16px 20px 8px 20px;
+  }
+
+  &__text {
+    margin: 0 20px 20px 20px;
+  }
+
+  &__bottom-text {
+    padding: 26px 0;
+    text-align: center;
+  }
+}
+
+Файл: RoleCards.tsx
+========================================
+import { Title, Text } from '../../common';
+import styles from './RoleCards.module.scss';
+
+export default function RoleCards() {
+  return (
+    <section className={styles['role-cards']}>
+      <div className={styles['role-cards__grid']}>
+        <div className={styles['role-cards__card']}>
+          <div className={styles['role-cards__image-placeholder']}></div>
+          <Text
+            size="xl"
+            weight="600"
+            className={styles['role-cards__title']}
+          >
+            Я — боец
+          </Text>
+          <Text
+            className={styles['role-cards__text']}
+            size="m"
+            color="secondary"
+          >
+            Текст, текст
+          </Text>
+        </div>
+
+        <div className={styles['role-cards__card']}>
+          <div className={styles['role-cards__image-placeholder']}></div>
+          <Text
+            size="xl"
+            weight="600"
+            className={styles['role-cards__title']}
+          >
+            Я — промоутер
+          </Text>
+          <Text
+            className={styles['role-cards__text']}
+            size="m"
+            color="secondary"
+          >
+            Текст, текст
+          </Text>
+        </div>
+
+        <div className={styles['role-cards__card']}>
+          <div className={styles['role-cards__image-placeholder']}></div>
+          <Text
+            size="xl"
+            weight="600"
+            className={styles['role-cards__title']}
+          >
+            Я — рекламодатель
+          </Text>
+          <Text
+            className={styles['role-cards__text']}
+            size="m"
+            color="secondary"
+          >
+            Текст, текст
+          </Text>
+        </div>
+      </div>
+
+			<Text
+				size="m"
+				weight="400"
+				color="secondary"
+				className={styles['role-cards__bottom-text']}
+			>
+				Без комиссий на старте. Доступ к базе бойцов и организаторов в пару кликов.
+			</Text>
+
+    </section>
+  );
+}
+
+Файл: WhySection.module.scss
+========================================
+.why-section {
+  padding-top: 128px;
+
+  &__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  &__card {
+    display: flex;
+    background-color: var(--color-main-white);
+    border-radius: var(--radius-default);
+    box-shadow: var(--shadow-default);
+    overflow: hidden;
+    min-height: 180px;
+    max-width: 960px;
+    transition: transform var(--transition-default) ease, box-shadow var(--transition-default) ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover-default);
+    }
+  }
+
+  &__image-placeholder {
+    flex: 1;
+    background-color: #e5e5e5;
+  }
+
+  &__content {
+    flex: 1;
+    padding: 32px;
+  }
+
+  &__list-title {
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  &__number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background-color: var(--color-main-pink);
+    border-radius: 50%;
+    color: var(--color-main-white);
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+}
+
+Файл: WhySection.tsx
+========================================
+import { Title, Text } from '../../common';
+import styles from './WhySection.module.scss';
+import { whySectionContent } from './whySectionContent';
+
+export default function WhySection() {
+  return (
+    <section className={styles['why-section']}>
+      <div className={styles['why-section__header']}>
+        <Title
+          as={2}
+          className={styles['why-section__title']}
+        >
+          {whySectionContent.title}
+        </Title>
+      </div>
+
+      <div className={styles['why-section__grid']}>
+        {whySectionContent.lists.map((list, index) => (
+          <div
+            key={index}
+            className={styles['why-section__card']}
+          >
+            <div className={styles['why-section__image-placeholder']}></div>
+            <div className={styles['why-section__content']}>
+              <Text
+                size='xl'
+                weight='600'
+                className={styles['why-section__list-title']}
+              >
+                {list.title}
+              </Text>
+              <ul className={styles['why-section__items']}>
+                {list.items.map((item, itemIndex) => (
+                  <li
+                    key={itemIndex}
+                    className={styles['why-section__item']}
+                  >
+                    <span className={styles['why-section__number']}>{itemIndex + 1}</span>
+                    <Text
+                      size='m'
+                      color='secondary'
+                    >
+                      {item}
+                    </Text>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+Файл: whySectionContent.ts
+========================================
+export const whySectionContent = {
+  title: 'Почему с PROБОИ удобнее работать',
+  lists: [
+    {
+      title: 'Для бойцов',
+      items: [
+        'Больше шансов попасть в поле зрения промоутеров.',
+        'Цифровой профиль вместо разрозненных сообщений и PDF.',
+        'Объективный AI-коэффициент как маркетинговый инструмент.',
+        'Простое управление статусом и актуальность данных.'
+      ]
+    },
+    {
+      title: 'Для промоутеров',
+      items: [
+        'Доступ к каталогу проверенных бойцов с реальной статистикой.',
+        'AI-помощь в подборе пар для турниров.',
+        'Экономия времени на поиск и отбор.',
+        'Прямая связь с бойцами в один клик.'
+      ]
+    }
+  ]
+};
+
+Файл: _app.tsx
+========================================
+import '../styles/globals.scss'
+import type { AppProps } from 'next/app'
+
+function MyApp({ Component, pageProps }: AppProps) {
+  return <Component {...pageProps} />
+}
+
+export default MyApp
+
+
+Файл: index.tsx
+========================================
+import Header from '../components/layout/Header/Header';
+import Hero from '../components/MainPage/Hero/Hero';
+import RoleCards from '../components/MainPage/RoleCards/RoleCards';
+import ForWhom from '../components/MainPage/ForWhom/ForWhom';
+import ChaosSection from '../components/MainPage/ChaosSection/ChaosSection';
+import HowItWorks from '../components/MainPage/HowItWorks/HowItWorks';
+import AICoefficient from '../components/MainPage/AICoefficient/AICoefficient';
+import CatalogSection from '../components/MainPage/CatalogSection/CatalogSection';
+import WhySection from '../components/MainPage/WhySection/WhySection';
+
+export default function Home() {
+  return (
+    <>
+      <Header/>
+      <div className='container'>
+        <Hero/>
+        <RoleCards/>
+        <ForWhom/>
+        <ChaosSection/>
+        <HowItWorks/>
+        <AICoefficient/>
+        <CatalogSection/>
+        <WhySection/>
+        <main>
+          <div>В процессе</div>
+        </main>
+      </div>
+    </>
+  );
+}
+

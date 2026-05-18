@@ -3,8 +3,8 @@
 
   &__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 36px;
+    grid-template-columns: repeat(auto-fill, minmax(var(--card-width), 1fr));
+    gap: var(--gap-slider);
   }
 
   &__card {
@@ -13,6 +13,7 @@
     box-shadow: var(--shadow-default);
     overflow: hidden;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    max-width: 400px;
 
     &:hover {
       transform: translateY(-2px);
@@ -36,6 +37,6 @@
 
   &__bottom-text {
     padding: 26px 0;
-    text-align: center;
+    text-align: left;
   }
 }

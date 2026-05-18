@@ -43,6 +43,7 @@
     border-radius: 50%;
     width: 36px;
     height: 36px;
+    margin-top: 4px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -52,6 +53,12 @@
     &:hover {
       border-color: var(--color-main-white);
       background: rgba(255, 255, 255, 0.2);
+    }
+
+    @media (max-width: 600px) {
+      margin-top: 10px;
+      width: 27px;
+      height: 27px;
     }
   }
 
@@ -78,5 +85,6 @@
     color: var(--color-main-white);
     font-size: 12px;
     font-weight: 600;
+    flex-shrink: 0;
   }
 }

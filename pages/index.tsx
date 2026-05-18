@@ -15,12 +15,32 @@ export default function Home() {
       <div className='container'>
         <Hero/>
         <RoleCards/>
-        <ForWhom/>
-        <ChaosSection/>
-        <HowItWorks/>
-        <AICoefficient/>
-        <CatalogSection/>
-        <WhySection/>
+        
+        <section id="for_who">
+          <ForWhom/>
+        </section>
+        
+        <section id="how_it_works">
+          <HowItWorks/>
+        </section>
+        
+        <section id="ai_coefficient">
+          <AICoefficient/>
+        </section>
+        
+        <section id="catalog">
+          <CatalogSection/>
+        </section>
+        
+        <section id="why">
+          <WhySection/>
+        </section>
+
+        <section id="solution">
+          <ChaosSection/>
+        </section>
+        
+        
         <main>
           <div>В процессе</div>
         </main>

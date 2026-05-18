@@ -58,4 +58,17 @@
     font-weight: 600;
     flex-shrink: 0;
   }
+
+  @media (max-width: 900px) {
+    .why-section {
+      &__card {
+        flex-direction: column;
+        max-width: 100%;
+      }
+
+      &__image-placeholder {
+        display: none;
+      }
+    }
+  }
 }

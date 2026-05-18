@@ -20,6 +20,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 20px;
   }
 
   &__logo {
@@ -78,7 +79,7 @@
     color: var(--color-main-white);
     height: 42px;
     padding: 0 20px;
-    border-radius: 9999px;
+    border-radius: 999px;
     font-size: 14px;
     font-weight: 600;
     border: none;
@@ -90,5 +91,13 @@
       padding: 0 16px;
       font-size: 13px;
     }
+
+    @media (max-width: 400px) {
+      width: 42px;
+      padding: 0;
+      font-size: 0;
+      border-radius: 50%;
+    }
   }
 }
+

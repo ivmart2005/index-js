@@ -9,6 +9,7 @@
     position: absolute;
     top: 0;
     left: 50%;
+    right: auto;
     transform: translateX(-50%);
     width: 100vw;
     height: 100%;
@@ -23,8 +24,8 @@
   &__cards {
     margin-top: 42px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 36px;
+    grid-template-columns: repeat(auto-fill, minmax(var(--card-width), 1fr));
+    gap: var(--gap-slider);
   }
 
   &__card {
